@@ -1,0 +1,94 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="titulo">CREAR TARJETA</h5>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="crearTarj()">
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">
+        <i
+          class="fa-regular fa-user"
+          [class.green-icon]="this.form.get('titular')?.valid"
+          [class.red-icon]="
+            this.form.get('titular')?.invalid && this.form.get('titular')?.dirty
+          "
+        ></i>
+      </span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Titular"
+        formControlName="titular"
+      />
+    </div>
+    <div class="col-lg-7">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+          <i
+            class="fa-regular fa-credit-card"
+            [class.green-icon]="this.form.get('numTarjeta')?.valid"
+            [class.red-icon]="
+              this.form.get('numTarjeta')?.invalid &&
+              this.form.get('numTarjeta')?.dirty
+            "
+          ></i>
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nº de Tarjeta"
+          formControlName="numTarjeta"
+          maxlength="16"
+        />
+      </div>
+      <div class="row">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">
+            <i
+              class="fa-regular fa-calendar-days"
+              [class.green-icon]="this.form.get('fechaCad')?.valid"
+              [class.red-icon]="
+                this.form.get('fechaCad')?.invalid &&
+                this.form.get('fechaCad')?.dirty
+              "
+            ></i>
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="MM/YY"
+            formControlName="fechaCad"
+          />
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">
+            <i
+              class="fa-solid fa-lock"
+              [class.green-icon]="this.form.get('cvv')?.valid"
+              [class.red-icon]="
+                this.form.get('cvv')?.invalid && this.form.get('cvv')?.dirty
+              "
+            ></i>
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="CVV"
+            formControlName="cvv"
+            maxlength="3"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="d-grid gap-2">
+      <button
+        class="btn btn-primary btn-lg"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        <i class="fa-regular fa-paper-plane"></i> Enviar
+      </button>
+    </div>
+  </form>
+</div>
