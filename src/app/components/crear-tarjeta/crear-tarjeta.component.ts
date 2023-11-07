@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Tarjeta } from 'src/app/model/tarjeta';
 import { TarjetaService } from 'src/app/services/tarjeta.service';
 
@@ -11,7 +12,11 @@ import { TarjetaService } from 'src/app/services/tarjeta.service';
 export class CrearTarjetaComponent {
   form: FormGroup;
 
-  constructor(private _fb: FormBuilder, private _ts: TarjetaService) {
+  constructor(
+    private _fb: FormBuilder,
+    private _ts: TarjetaService,
+    private _toastr: ToastrService
+  ) {
     this.form = this._fb.group({
       titular: [
         '',
@@ -42,7 +47,10 @@ export class CrearTarjetaComponent {
     );
 
     this._ts.create(TARJETA);
+    this._toastr.success('Registro añadido con éxito', 'Crear Tarjeta:')
     // this.form.reset();
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000)
   }
 }

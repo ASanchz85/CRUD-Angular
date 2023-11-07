@@ -1,23 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Tarjeta } from '../model/tarjeta';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TarjetaService {
+  private tarjeta$ = new Subject<Tarjeta>();
+
   constructor(private _http: HttpClient) {}
 
-  create(tarjeta: any) {
+  create(tarjeta: Tarjeta) {
     console.log(tarjeta);
     this._http
-      .post<{ tarjetasCredito: any }>('http://localhost:3000/addcard', tarjeta)
+      .post<{ tarjetasCredito: Tarjeta }>(
+        'http://localhost:3000/addcard',
+        tarjeta
+      )
       .subscribe();
   }
 
   read() {
-    let cuentasBancarias: any[] = [];
+    let cuentasBancarias: Tarjeta[] = [];
     this._http
-      .get<{ cards: any[] }>('http://localhost:3000/cards')
+      .get<{ cards: Tarjeta[] }>('http://localhost:3000/cards')
       .subscribe((jsonData) => {
         jsonData.cards.forEach((element) => {
           cuentasBancarias.push(element);
@@ -25,5 +32,24 @@ export class TarjetaService {
       });
 
     return cuentasBancarias;
+  }
+
+  update(tarjeta: Tarjeta) {
+    return this._http.put(
+      'http://localhost:3000/update-entry/' + tarjeta,
+      tarjeta
+    );
+  }
+
+  delete(id: string) {
+    return this._http.delete('http://localhost:3000/removecard/' + id);
+  }
+
+  setTarjeta(tarjeta: Tarjeta) {
+    this.tarjeta$.next(tarjeta);
+  }
+
+  getTarjeta() {
+    return this.tarjeta$.asObservable();
   }
 }

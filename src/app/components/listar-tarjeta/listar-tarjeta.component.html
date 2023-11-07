@@ -16,8 +16,8 @@
           <td>{{card.titular}}</td>
           <td>{{card.numeroTarjeta}}</td>
           <td>{{card.fechaCaducidad}}</td>
-          <td><i class="fa-solid fa-pencil"></i></td>
-          <td><i class="fa-solid fa-trash"></i></td>
+          <td (click)="editarTarjeta(card)" ><i class="fa-solid fa-pencil"></i></td>
+          <td (click)="eliminar(card._id)" ><i class="fa-solid fa-trash"></i></td>
         </tr>
       </tbody>
     </table>

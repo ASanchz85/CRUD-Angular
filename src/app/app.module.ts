@@ -6,10 +6,18 @@ import { CrearTarjetaComponent } from './components/crear-tarjeta/crear-tarjeta.
 import { ListarTarjetaComponent } from './components/listar-tarjeta/listar-tarjeta.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent, CrearTarjetaComponent, ListarTarjetaComponent],
-  imports: [BrowserModule, ReactiveFormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
